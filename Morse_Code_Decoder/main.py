@@ -9,11 +9,12 @@ def morse_coding(text):
         else:
             print("Please enter valid character")
     print(f"Here's the morse code: \n{end_text}")
-    return end_text
 
-def decoding(dictionary, text):
+
+def decoding(dictionary, text2):
+    entry = text2.split(',')
     decoded_text = []
-    for code in text:
+    for code in entry:
         for key, val in dictionary.items():
             if val == code:
                 decoded_text.append(key)
@@ -25,14 +26,18 @@ should_end = False
 while not should_end:
     print(logo)
     print("Welcome to my morse code decoder")
-    text = input("Type the word to convert into morse code: \n")
-    decoded_text = morse_coding(text.upper())
+    choice = input("Do you want to encode or decode? Type 'e' or 'd'\n")
+    if choice == "e":
+        text = input("Type the word to convert into morse code: \n")
+        morse_coding(text.upper())
+    elif not choice:
+        print("Error please enter 'D' or 'E' only.")
+    else:
+        text2 = input("Type the morse code you want to convert into text separated by ',': \n")
+        decoding(morse,text2)
 
-    decode = input("Do you want to decode your message? Type 'y' or 'n' \n")
-    if decode == "y":
-        decoding(morse, decoded_text)
-    restart = input("Type 'yes' if you want to convert again, otherwise type 'no'.\n")
-    if restart == "no":
+    restart = input("Do you want to convert again? Type 'y' or 'n':\n")
+    if restart == "n":
         should_end = True
         print("Goodbye")
     os.system('cls')
