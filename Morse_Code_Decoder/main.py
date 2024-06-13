@@ -12,7 +12,7 @@ def morse_coding(text):
 
 
 def decoding(dictionary, text2):
-    entry = text2.split(',')
+    entry = text2.split(' ')
     decoded_text = []
     for code in entry:
         for key, val in dictionary.items():
@@ -26,14 +26,14 @@ should_end = False
 while not should_end:
     print(logo)
     print("Welcome to my morse code decoder")
-    choice = input("Do you want to encode or decode? Type 'e' or 'd'\n")
+    choice = input("Do you want to encode or decode? Type 'e' or 'd':\n")
     if choice == "e":
         text = input("Type the word to convert into morse code: \n")
         morse_coding(text.upper())
     elif not choice:
         print("Error please enter 'D' or 'E' only.")
     else:
-        text2 = input("Type the morse code you want to convert into text separated by ',': \n")
+        text2 = input("Type the morse code you want to convert into text each character separated by space: \n")
         decoding(morse,text2)
 
     restart = input("Do you want to convert again? Type 'y' or 'n':\n")
