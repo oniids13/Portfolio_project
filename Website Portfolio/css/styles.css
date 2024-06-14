@@ -7,7 +7,7 @@ h1 {
 
 .desc {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .quote {
@@ -41,17 +41,107 @@ h1 {
     font-size: 20px;
 }
 
-.portfolio {
-    background-color: #EADBC8;
-}
 
 .arrow {
     width: 100px;
     height: 100px;
 }
 
+.arrow:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 .port {
     width: 600px;
     height: 300px;
+}
 
+.port:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.about {
+    border-radius: 50%;
+    width: 500px;
+}
+
+.abouts {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#F8F4E1;
+    padding-bottom: 3%;
+  }
+  
+  .r {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .c {
+    margin: 0 10px;
+  }
+  
+  .pic {
+    max-width: 100%;
+    height: 300px;
+    display: block;
+  }
+  
+  .pic:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#skill {
+    text-align: right;
+}
+
+.skl {
+    background-color: #AF8F6F ;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.exp {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.text-info-emphasis {
+    font-size: 20px;
+}
+
+footer {
+    background-color: #FFE8C8;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.cont {
+    border-radius: 50%;
+    width: 400px;
+    height: 350px;
+}
+
+.contact {
+    margin-bottom: 3%;
+}
+
+.form {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #F8F4E1;
+}
+
+#foot {
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
