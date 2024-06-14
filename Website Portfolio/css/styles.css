@@ -1,0 +1,57 @@
+h1 {
+    color: black;
+    font-weight: bold;
+    font-size: 50px;
+    font-family: sans-serif;
+}
+
+.desc {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.quote {
+    font-weight: bold;
+    font-size: 40px;
+    color: blue;
+    text-align: center;
+}
+
+.about-me {
+    font-size: 15px;
+    color: #6C5F5B;
+}
+
+.what {
+    background-color: #EADBC8;
+}
+
+.laptop {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+
+}
+
+.skill {
+    color:blue;
+    font-size: 20px;
+}
+
+.portfolio {
+    background-color: #EADBC8;
+}
+
+.arrow {
+    width: 100px;
+    height: 100px;
+}
+
+.port {
+    width: 600px;
+    height: 300px;
+
+}
