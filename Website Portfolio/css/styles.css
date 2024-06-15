@@ -33,6 +33,8 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
+    padding-bottom: 1%;
+    border-radius: 10%;
 
 }
 
@@ -61,20 +63,25 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .about {
-    border-radius: 50%;
-    width: 500px;
+    width: 300px;
 }
 
 .abouts {
     font-weight: bold;
     font-size: medium;
+
+}
+
+.ab {
+    background-color: #AF8F6F;
+    padding-top: 0.5px;
+    padding-bottom: 30px;
 }
 
 .gallery {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:#F8F4E1;
     padding-bottom: 3%;
   }
   
@@ -143,5 +150,18 @@ footer {
 #foot {
     font-weight: bolder;
     font-size: 20px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Audiowide", sans-serif;
+}
+
+#copyright {
+    font-family: "Audiowide", sans-serif;
+}
+
+.DA {
+    background-color:#F8F4E1;
+    padding-top: 2%;
+}
+
+.a {
+    font-family: "Audiowide", sans-serif;
 }

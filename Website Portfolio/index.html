@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Audiowide&effect=shadow-multiple"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -20,7 +24,7 @@
         href="/"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
       >
-        <img src="/images/my_logo.png" />
+        <img width="150px" src="/images/my_logo.png" />
       </a>
 
       <ul class="nav nav-pills">
@@ -47,14 +51,19 @@
           <div class="col-6">
             <p>HELLO, MY NAME IS</p>
             <br />
-            <h1><em>Jose Dino Abaya</em></h1>
+            <h1 class="font-effect-shadow-multiple">
+              <em>Jose Dino Abaya</em>
+            </h1>
             <br />
-            Programmer / Data Analyst
-            <br /><br />
-            JDINO.ABAYA@GMAIL.COM
-            <br />
-            +63 999 905 3499 <br />
-            +63 (02) 863 4865
+            <p class="text-primary">
+              <strong>Programmer / Data Analyst</strong>
+              <br /><br />
+
+              JDINO.ABAYA@GMAIL.COM
+              <br />
+              +63 999 905 3499 <br />
+              +63 (02) 863 4865
+            </p>
           </div>
         </div>
       </div>
@@ -235,7 +244,7 @@
     <section class="portfolio">
       <div class="container py-5">
         <div class="row mt-2">
-          <h2>Portfolio</h2>
+          <h2><strong>Portfolio</strong></h2>
           <a href="portfolio.html"
             ><img
               class="arrow"
@@ -344,7 +353,9 @@
           ></a>
         </li>
       </ul>
-      <p class="text-center text-body-secondary">© 2024 Jose Dino Portfolio</p>
+      <p id="copyright" class="text-center text-body-secondary">
+        © 2024 Jose Dino Portfolio
+      </p>
     </footer>
   </body>
   <script
