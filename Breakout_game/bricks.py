@@ -13,7 +13,7 @@ class Bricks(Turtle):
         self.goto(position)
 
     def random_color(self):
-        colors = ["red","blue", "green", "yellow", "orange", "purple", "pink"]
+        colors = ["red","blue", "green", "yellow", "orange", "purple", "pink", "brown"]
         return random.choice(colors)
 
 
