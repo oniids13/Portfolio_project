@@ -1,5 +1,6 @@
 from turtle import Turtle, Screen
 from ball import Ball
+from paddle import Paddle
 import time
 
 screen = Screen()
@@ -9,7 +10,11 @@ screen.title("Break out game")
 screen.tracer(0)
 
 ball = Ball()
+paddle = Paddle((0,-270))
 
+screen.listen()
+screen.onkeypress(paddle.left_move, "Left")
+screen.onkeypress(paddle.right_move, "Right")
 
 
 game_is_on = True
@@ -29,6 +34,10 @@ while game_is_on:
     #Collision with the floor
     if ball.ycor() < -290:
         ball.reset_position()
+
+    #Collision with the paddle
+    if ball.distance(paddle) < 50 and ball.ycor() < -250:
+        ball.bounce_y()
 
 
 
