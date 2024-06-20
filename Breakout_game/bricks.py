@@ -16,11 +16,17 @@ class Bricks(Turtle):
         colors = ["red","blue", "green", "yellow", "orange", "purple", "pink", "brown"]
         return random.choice(colors)
 
+    def destroy(self):
+        self.hideturtle()
+
 
 
 def create_bricks(rows, cols,start_x, start_y, brick_width, brick_height, x_gap, y_gap):
+    bricks = []
     for row in range(rows):
         for col in range(cols):
             x = start_x + col * (brick_width + x_gap)
             y = start_y - row * (brick_height + y_gap)
-            Bricks((x, y))
+            brick = Bricks((x, y))
+            bricks.append(brick)
+    return bricks
