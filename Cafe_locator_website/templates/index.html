@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>WorkCafe</title>
+        {% block styles %}
+    <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+    {% endblock %}
+</head>
+
+<body class="d-flex h-100 text-center text-bg-light">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="{{ url_for('cafe') }}" class="nav-link">Cafes</a></li>
+        <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+      </ul>
+</header>
+
+<main class="px-3">
+      <div class="head header-container">
+    <h1>Looking for a place to work and sip coffee?</h1>
+    <p class="lead">WorkCafe is the place to search for your next fave coffee shop and work spot.</p>
+    <p class="lead">
+      <a href="{{ url_for('cafe') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">Explore now!</a>
+    </p>
+      </div>
+
+<section class="row pt-5 pb-5">
+<div class="col-sm-4 xs-padding-top">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-laptop" viewBox="0 0 16 16">
+  <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5"/>
+</svg>
+<h3>Be Productive</h3>
+<p>Find venues with reliable <strong>Wi-Fi</strong>, ample <strong>power sockets</strong>, and comfy <strong>seating areas</strong>.</p>
+</div>
+<div class="col-sm-4 xs-padding-top">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cup-hot" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6zM13 12.5a2 2 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5M2.64 13.825 1.123 7h11.754l-1.517 6.825A1.5 1.5 0 0 1 9.896 15H4.104a1.5 1.5 0 0 1-1.464-1.175"/>
+  <path d="m4.4.8-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 3.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 6.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 9.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8"/>
+</svg>
+<h3>Feel Welcome</h3>
+<p>Discover the <strong>best times to work</strong>, based on community data.</p>
+</div>
+<div class="col-sm-4 xs-padding-top">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"/>
+</svg>
+<h3>Stay Inspired</h3>
+<p>Uncover new places with <strong>laid-back ambiance</strong>, and <strong>friendly vibes</strong>.</p>
+</div>
+</section>
+<hr>
+<section class="row justify-content-center pt-5 pb-5">
+<div class="col-md-8">
+<p class="font-large">"LaptopFriendly collaborates with local cafes that <strong>embrace and support the remote work lifestyle</strong> . Each location is added and inspected by the users within our remote workers and coffee lover community."</p>
+</div>
+</section>
+<hr>
+
+<section>
+    <div class="container my-5">
+  <div class="position-relative p-5 text-center text-muted">
+      <div class="pb-4">
+        <h1 class="text-body-emphasis">Let's get started!</h1>
+      </div>
+      <div class="pb-4">
+          <img class="map" src="/static/images/gmap.png">
+      </div>
+<div class="jumbo pt-3 pb-3">
+    <p class="col-lg-6 mx-auto mb-4">
+      "Welcome to WorkCafe, your ultimate guide to discovering the best cafes that cater to remote workers. We partner with local venues that value and support the remote work lifestyle, providing the perfect blend of a productive workspace and a cozy coffeehouse atmosphere. Each location is carefully added by our community, ensuring you have access to the most welcoming and conducive environments for working remotely. Explore now and find your next favorite spot to work and enjoy great coffee!"
+    </p>
+</div>
+      <a href="{{ url_for('cafe') }}">
+    <button class="btn btn-secondary px-5 mb-5" type="button">
+      See all cafes
+    </button>
+          </a>
+  </div>
+</div>
+</section>
+
+  </main>
+
+
+{% include "footer.html" %}

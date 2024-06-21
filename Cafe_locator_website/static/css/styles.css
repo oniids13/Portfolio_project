@@ -1,0 +1,48 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.head {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.header-container {
+    background-image: url('/static/images/cafebg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25%;
+}
+
+.header-container h1,
+.header-container .lead {
+    margin: 0;
+    background: rgba(0, 0, 0, 0.3); /* Optional: To make text more readable */
+}
+
+.header-container .lead {
+    margin-top: 20px;
+}
+
+.font-large {
+font-size: 20px;
+}
+
+.map {
+height: 200px;
+width: 500px;
+}
+
+.jumbo {
+font-size: 20px;
+}
+

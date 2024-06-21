@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>WorkCafe</title>
+        {% block styles %}
+    <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+    {% endblock %}
+</head>
+
+<body class="d-flex h-100 text-center text-bg-light">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="{{ url_for('cafe') }}" class="nav-link">Cafes</a></li>
+        <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link active">Contact</a></li>
+      </ul>
+</header>
+
+
+
+{% include "footer.html" %}
