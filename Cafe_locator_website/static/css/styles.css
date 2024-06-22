@@ -61,4 +61,9 @@ height: 100px;
 width: 100px
 }
 
-
+.top-link {
+display: block;
+text-align: center;
+margin: 20px 0;
+font-size: 18px;
+}

@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, redirect, url_for, flash
+from flask import Flask, abort, render_template, redirect, url_for, flash, request, get_flashed_messages
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, BooleanField
@@ -80,7 +80,38 @@ def add_cafe():
         return redirect(url_for('cafe'))
     return render_template("add_cafe.html", form=form)
 
+@app.route("/edit_cafe/<int:cafe_id>", methods=['GET', 'POST'])
+def edit_cafe(cafe_id):
+    cafe = Cafe.query.get_or_404(cafe_id)
+    form = CafeForm()
+    if form.validate_on_submit():
+        cafe.name = form.cafe_name.data
+        cafe.location = form.cafe_loc.data
+        cafe.seats = form.seats.data
+        cafe.coffee_price = form.coffee_price.data
+        cafe.map_url = form.map_url.data
+        cafe.img_url = form.img_url.data
+        cafe.has_toilet = form.has_toilet.data
+        cafe.has_wifi = form.has_wifi.data
+        cafe.has_sockets = form.has_sockets.data
+        cafe.can_take_calls = form.can_take_calls.data
+        db.session.commit()
+        return redirect(url_for('cafe'))
 
+    elif request.method == 'GET':
+        # Populate form with existing data
+        form.cafe_name.data = cafe.name
+        form.cafe_loc.data = cafe.location
+        form.seats.data = cafe.seats
+        form.coffee_price.data = cafe.coffee_price
+        form.map_url.data = cafe.map_url
+        form.img_url.data = cafe.img_url
+        form.has_toilet.data = cafe.has_toilet
+        form.has_wifi.data = cafe.has_wifi
+        form.has_sockets.data = cafe.has_sockets
+        form.can_take_calls.data = cafe.can_take_calls
+
+    return render_template("edit.html", form=form)
 
 
 
