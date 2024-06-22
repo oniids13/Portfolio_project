@@ -19,15 +19,104 @@
 
 <body class="d-flex h-100 text-center text-bg-light">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-<header class="d-flex justify-content-center py-3">
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 pb-1 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img class="logo" src="/static/images/workcafe_logo.png">
+      </a>
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="{{ url_for('cafe') }}" class="nav-link">Cafes</a></li>
         <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link active">About</a></li>
-        <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
       </ul>
 </header>
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col my-5 d-flex justify-content-center align-items-center" style="height: 50vh;">
+                    <div class="text-center">
+                    <h1 class="text-start">
+                        <strong style="font-weight: 100">HEY!</strong><br>
+                        We're WorkCafe ☕
+                    </h1>
+                    <p class="fs-3 text-start">
+                        "Empowering Remote Work, One Coffee Shop at a Time"
+                    </p>
+                        </div>
+                </div>
+                <div class="col my-5">
+                    <img class="about-pic" src="/static/images/about-pic.jpg">
+                </div>
+        </div>
+        </div>
+            <hr>
+    </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <h1 class="mt-3 mb-3">Our Story</h1>
+                </div>
+                <div class="row">
+                    <p class="fs-4 mt-5 mb-3">
+                        At WorkCafe, we believe that the perfect blend of productivity and relaxation can be found in your favorite local cafe. Our mission is to transform cafes into ideal workspaces for remote workers, freelancers, and digital nomads. We understand that a conducive environment can significantly enhance your work experience, and that’s why we partner with cafes that offer the best ambiance, reliable Wi-Fi, and excellent coffee. Each location featured on WorkCafe is meticulously inspected and handpicked by our dedicated team, ensuring that every venue meets our high standards for a productive remote working space.
+                    </p>
+                    <p class="fs-4 mt-5 mb-3">
+                        WorkCafe was born out of a passion for supporting the remote work lifestyle and a love for great coffee. We know the challenges of finding the right spot to work outside of a traditional office, and we aim to make it easier for you to discover cafes that cater to your needs. Whether you’re looking for a quiet corner to focus, a vibrant atmosphere to spark creativity, or a cozy nook to relax and recharge, WorkCafe is here to help you find the perfect place to work and enjoy the best that local cafes have to offer. Join us on our journey to redefine remote working, one coffee shop at a time.
+                    </p>
+                </div>
+                  <hr>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col justify-content-center align-items-center" style="height: 30vh;">
+                        <h2>
+                        <strong>Mission</strong>
+                        </h2>
+                        <img class="mv" src="/static/images/mission_icon.png">
+                    </div>
+                    <div class="col justify-content-center align-items-center" style="height: 30vh;">
+                        <p class="text-secondary fs-5">
+                            At WorkCafe, our mission is to revolutionize the remote work experience by connecting remote workers, freelancers, and digital nomads with the best cafes that offer a perfect blend of productivity and comfort. We strive to create a community where local cafes become vibrant hubs for creativity, collaboration, and success, ensuring every venue we feature is equipped to support and inspire the modern workforce.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col justify-content-center align-items-center" style="height: 30vh;">
+                        <p class="text-secondary fs-5">
+                            Our vision is to be the leading platform for remote work-friendly cafes worldwide, fostering a global network of venues that champion the remote work culture. We aim to empower individuals to work from anywhere, while enjoying the unique atmospheres and amenities that local cafes provide, ultimately enhancing work-life balance and productivity for remote workers everywhere.
+                        </p>
+                    </div>
+                    <div class="col justify-content-center align-items-center" style="height: 30vh;">
+                        <h2>
+                            <strong>Vision</strong>
+                        </h2>
+                        <img class="mv" src="/static/images/vision.jpg">
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </section>
+    <section>
+        <div class="container">
+            <div class="mt-5">
+                <h1>Connect with us!</h1>
+                <p class="mt-3 fs-5">Follow us on our social media pages.</p>
+            </div>
+            <div class="justify-content-center">
+                <a class="text-body-secondary" target="_blank" href="https://www.facebook.com/oniids.abaya/"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+            </svg></a>
+                <a class="text-body-secondary" target="_blank" href="https://www.instagram.com/oniids/"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg></a>
+            </div>
+
+        </div>
+    </section>
 
 
 
+</main>
 {% include "footer.html" %}

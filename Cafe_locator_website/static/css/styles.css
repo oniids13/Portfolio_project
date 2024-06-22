@@ -15,7 +15,7 @@ body, html {
     background-image: url('/static/images/cafebg.jpg');
     background-size: cover;
     background-position: center;
-    height: 70vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,4 +45,20 @@ width: 500px;
 .jumbo {
 font-size: 20px;
 }
+
+.logo {
+height: 80px;
+width: 120px;
+}
+
+.about-pic {
+height: 80%;
+width: 60%;
+}
+
+.mv {
+height: 100px;
+width: 100px
+}
+
 

@@ -19,17 +19,20 @@
 
 <body class="d-flex h-100 text-center text-bg-light">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-<header class="d-flex justify-content-center py-3">
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 pb-1 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img class="logo" src="/static/images/workcafe_logo.png">
+      </a>
+
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="{{ url_for('cafe') }}" class="nav-link">Cafes</a></li>
         <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
       </ul>
 </header>
 
-<main class="px-3">
-      <div class="head header-container">
+<main>
+      <div class="head header-container mb-5">
     <h1>Looking for a place to work and sip coffee?</h1>
     <p class="lead">WorkCafe is the place to search for your next fave coffee shop and work spot.</p>
     <p class="lead">
@@ -83,11 +86,18 @@
       "Welcome to WorkCafe, your ultimate guide to discovering the best cafes that cater to remote workers. We partner with local venues that value and support the remote work lifestyle, providing the perfect blend of a productive workspace and a cozy coffeehouse atmosphere. Each location is carefully added by our community, ensuring you have access to the most welcoming and conducive environments for working remotely. Explore now and find your next favorite spot to work and enjoy great coffee!"
     </p>
 </div>
+      <div>
       <a href="{{ url_for('cafe') }}">
     <button class="btn btn-secondary px-5 mb-5" type="button">
       See all cafes
     </button>
           </a>
+      <a href="{{ url_for('about') }}">
+    <button class="btn btn-success px-5 mb-5" type="button">
+      About us
+    </button>
+          </a>
+          </div>
   </div>
 </div>
 </section>
