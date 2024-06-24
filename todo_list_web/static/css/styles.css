@@ -1,0 +1,13 @@
+.done {
+            text-decoration: line-through;
+        }
+
+ .list-group-items {
+            list-style-type: none; /* Removes the bullet points */
+        }
+
+footer {
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+            text-align: center;
+        }
