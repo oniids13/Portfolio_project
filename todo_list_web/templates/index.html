@@ -20,27 +20,21 @@
 <div class="mx-3">
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
   <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
   <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
   <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
 </svg>
-    <span class="fs-4">To-do List</span>
+    <span class="fs-4 mx-3">To-do List</span>
   </a>
 
-  <ul class="nav nav-pills">
-    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-  </ul>
+
 </header>
     </div>
     </div>
 <body>
-<div class="mx-3 mb-5">
-    <h1 class="fs-3">My Todo List - {{ date }}</h1>
-</div>
+<div class="container mt-5 mx-3 mb-5">
+    <h1 class="fs-3 px-3">My Todo List - {{ date }}</h1>
+
 <form method="POST">
 <div class="col-4 mx-3">
     <input name="task" class="form-control" type="text" placeholder="Write your task here" aria-label="default input example">
@@ -49,35 +43,35 @@
 </form>
 
 <div class="mx-3 mt-5">
-    <h2 class="fs-4">Available Tasks</h2>
+    <h2 class="fs-4">Tasks</h2>
 
 <ul class="list-group mt-4">
     {% for task in tasks %}
     <li class="list-group-items pb-2">
         <form method="POST" style="display:inline;">
             <input type="hidden" name="toggle" value="{{loop.index0}}">
-            <input type="checkbox" onchange="this.form.submit()"> {% if task.done %}✔️{% endif %}
-            <span class="{%if task.done%}done{%endif%}">{{task.description}}</span>
+            <input type="checkbox" onchange="this.form.submit()">
+            <span class="{%if task.done%}done{%endif%}">{{task.description}}</span>{% if task.done %}✔️{% endif %}
         </form>
         <form method="POST" style="display:inline;">
-                        <input type="hidden" name="delete" value="{{ loop.index0 }}">
-                        <button type="submit" class="btn btn-danger btn-sm">❌</button>
-                    </form>
+            <input type="hidden" name="delete" value="{{ loop.index0 }}">
+            <button type="submit" class="btn btn-danger btn-sm">X</button>
+        </form>
     </li>
     {% endfor %}
 </ul>
 </div>
-
+</div>
 </body>
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+<footer class="d-flex flex-wrap justify-content-between align-items-center border-top">
     <div class="col-md-4 d-flex align-items-center">
       <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
         <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
       </a>
-      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Jose Dino Abaya</span>
+      <span class="mb-3 mb-md-0 text-body-secondary">© {{year}} Jose Dino Abaya</span>
     </div>
 
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex mx-5">
       <li class="ms-3"><a class="text-body-secondary" target="_blank" href="https://www.facebook.com/oniids.abaya/"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
   <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
 </svg></a></li>
@@ -88,6 +82,7 @@
   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
 </svg></a></li>
     </ul>
+
   </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

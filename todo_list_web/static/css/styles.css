@@ -1,13 +1,23 @@
 .done {
-            text-decoration: line-through;
-        }
+    text-decoration: line-through;
+}
 
- .list-group-items {
-            list-style-type: none; /* Removes the bullet points */
-        }
+.list-group-items {
+    list-style-type: none;
+}
 
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    flex: 1;
+}
 footer {
-            background-color: #f8f9fa;
-            padding: 1rem 0;
-            text-align: center;
-        }
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    text-align: center;
+}

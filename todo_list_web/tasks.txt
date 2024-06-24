@@ -1,1 +1,2 @@
-Buy milk|False
+Complete the Python Bootcamp|False
+Feed the cats|False

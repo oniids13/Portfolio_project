@@ -19,7 +19,7 @@ def read_tasks():
         with open('tasks.txt', 'r') as file:
             for line in file:
                 description, done = line.strip().split('|')
-                tasks.append({'description': description, 'done': done =='True'})
+                tasks.append({'description': description, 'done': done == 'True'})
     except FileNotFoundError:
         pass
     return tasks
@@ -32,6 +32,8 @@ def write_tasks(tasks):
 def home():
     today = date.today()
     today = today.strftime("%m/%d/%Y")
+    year = date.today()
+    year = year.year
     tasks = read_tasks()
     if request.method == 'POST':
         task = request.form.get('task')
@@ -46,11 +48,8 @@ def home():
 
         write_tasks(tasks)
         return redirect(url_for('home'))
-    return render_template('index.html', date=today, tasks=tasks)
+    return render_template('index.html', date=today, tasks=tasks, year=year)
 
-@app.route('/delete')
-def delete():
-    pass
 
 if __name__ == '__main__':
     app.run(debug=True)
