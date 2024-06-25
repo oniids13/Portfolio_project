@@ -18,6 +18,7 @@ def water_mark_image():
         txt = Image.new("RGBA", im.size, (255,255,255,0))
         font = ImageFont.truetype('arial.ttf', 36)
         text = f"Photo by: {watermark_input.get()}"
+        watermark_entry.set("")
         margin = 10
         bbox = draw.textbbox((0, 0), text=text, font=font)
         text_width, text_height = bbox[2] - bbox[0], bbox[3] - bbox[1]
@@ -110,7 +111,8 @@ welcome_label.config(font=("Arial", 20))
 welcome_label.config(bg=YELLOW)
 welcome_label.grid(column=1, row=0, columnspan=3)
 
-watermark_input = tk.Entry(width=25)
+watermark_entry = tk.StringVar()
+watermark_input = tk.Entry(window, textvariable=watermark_entry ,width=25)
 watermark_input.grid(column=1, row=5)
 
 watermark_label = tk.Label(text="Please enter the name you want to watermark:")
