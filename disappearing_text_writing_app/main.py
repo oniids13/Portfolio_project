@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import font
 
 timer = None
-typing_stop_countdown = 3000
+typing_stop_countdown = 5000
 line_height = 25
 max_width = 800
 margin = 10
