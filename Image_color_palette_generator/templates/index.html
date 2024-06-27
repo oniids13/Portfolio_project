@@ -36,18 +36,29 @@
             Upload your image to show the top 10 color palette used!
         </p>
     </div>
-    <div class="pic mt-5 d-flex justify-content-center border border-secondary-subtle py-5">
-              {%if filepath %}
-        <img src="">
+    <div class="pic mt-5 d-flex justify-content-center flex-column border border-secondary-subtle py-5 px-5">
+        {%if filepath %}
+        <img class="pics mb-5" src="/static/images/uploads/{{filepath}}">
         {% else %}
-        <img src="Image_color_palette_generator/static/images/uploads/Dino_pic.jpg">
+        <img class="pics mb-5" src="{{ url_for('static', filename='images/sample.jpg') }}">
         {% endif %}
+
+        <table class="table">
+        <thead class="text-center">
+		    <tr><th>Color</th><th>Color Code</th></tr>
+        </thead>
+        <tbody class="text-center">
+        {% for color in colors %}
+		    <tr><td style="background-color:{{ color }}"></td><td>{{ color }}</td></tr>
+        {% endfor %}
+        </tbody>
+	</table>
     </div>
     <div class="row text-center mt-5">
-        <h1>Upload a File</h1>
-        <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data">
+        <h3 class="mb-5">Upload a File</h3>
+        <form class="pb-5" action="{{ url_for('home') }}" method="post" enctype="multipart/form-data">
             <input type="file" name="file">
-            <input type="submit" value="Upload">
+            <input type="submit" value="Run">
         </form>
     </div>
 

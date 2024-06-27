@@ -7,7 +7,7 @@ body, html {
 
 .logo {
 height: 60px;
-width: 120px;
+width: 140px;
 }
 
 body {
@@ -25,4 +25,12 @@ footer {
 
 .header {
 background-color: #7f8c8d;
+}
+
+.pics {
+height: 60%;
+width: 50%;
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
