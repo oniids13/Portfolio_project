@@ -1,5 +1,5 @@
 .done {
-    text-decoration: line-through;
+display: none;
 }
 
 .list-group-items {

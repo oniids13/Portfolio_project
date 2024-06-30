@@ -51,16 +51,34 @@
         <form method="POST" style="display:inline;">
             <input type="hidden" name="toggle" value="{{loop.index0}}">
             <input type="checkbox" onchange="this.form.submit()">
-            <span class="{%if task.done%}done{%endif%}">{{task.description}}</span>{% if task.done %}✔️{% endif %}
+              <span>{{task.description}}</span>
         </form>
         <form method="POST" style="display:inline;">
             <input type="hidden" name="delete" value="{{ loop.index0 }}">
+            <input type="hidden" name="section" value="tasks">
             <button type="submit" class="btn btn-danger btn-sm">X</button>
         </form>
     </li>
     {% endfor %}
 </ul>
 </div>
+    <div class="mx-3 mt-5">
+    <h2 class="fs-4">Done</h2>
+<ul class="list-group mt-4">
+    {% for task in done_tasks %}
+    <li class="list-group-items pb-2">
+        <span class="text-secondary">✔️ {{task.description}}</span>
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="delete" value="{{ loop.index0 }}">
+             <input type="hidden" name="section" value="done_tasks">
+            <button type="submit" class="btn btn-danger btn-sm">X</button>
+        </form>
+    </li>
+    {%endfor%}
+</ul>
+</div>
+
+
 </div>
 </body>
 <footer class="d-flex flex-wrap justify-content-between align-items-center border-top">

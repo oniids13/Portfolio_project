@@ -1,2 +1,3 @@
-Complete the Python Bootcamp|False
-Feed the cats|False
+Buy Grocery|False
+Complete the Python Bootcamp|True
+Feed the cats|True
