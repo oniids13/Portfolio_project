@@ -5,9 +5,14 @@
 {% block content %}
 
 <div class="container">
-    <img src="{{ movie.img_url }}">
-    <h1>{{ movie.title }}</h1>
+    <div>
+    <img class="movie-pic border border-primary border-5 mb-3" src="{{ movie.img_url }}">
+    </div>
+    <h1 class="fw-semibold font-monospace text-dark-emphasis">{{ movie.title }}</h1>
     <p>{{ movie.year }}</p>
+    <p>{{ movie.genres }}</p>
+    <p><b>Run time:</b> {{ movie.runtime}} mins.</p>
+    <p><b>Popularity:</b> {{ movie.popularity }}</p>
     <p>{{movie.description}}</p>
 
 </div>

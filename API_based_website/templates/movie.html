@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Movie List{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if movie_data %}
+    {% for list in movie_data %}
+    <ul>
+        <li>
+            <a href="{{ url_for('select', movie_id=list.movie_id) }}">{{ list.title }} - {{ list.year }}</a>
+        </li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+{% endblock %}
