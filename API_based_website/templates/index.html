@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Movie Online{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="d-flex justify-content-center mb-3">
+        <h1 class="text-primary text-start mb-5">Want to search for a Movie?</h1>
+    </div>
+    <div class="d-flex justify-content-center mb-3">
+     <form method="POST">
+    <input name="movie" class="form-control" type="text" placeholder="Enter a movie name" aria-label="default input example">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-secondary mt-2">Search</button>
+        </div>
+     </form>
+    </div>
+
+<div>
+    {% if movie_data %}
+    {% for list in movie_data %}
+    <ul>
+        <li>
+            <a href="{{ url_for('select', movie_id=list.movie_id) }}">{{ list.title }} - {{ list.year }}</a>
+        </li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+</div>
+
+</div>
+
+
+{% endblock %}

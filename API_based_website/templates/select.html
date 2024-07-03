@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Select Movie{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <img src="{{ movie.img_url }}">
+    <h1>{{ movie.title }}</h1>
+    <p>{{ movie.year }}</p>
+    <p>{{movie.description}}</p>
+
+</div>
+
+{% endblock %}
