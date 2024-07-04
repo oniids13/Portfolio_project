@@ -1,25 +1,21 @@
+
 {% extends 'base.html' %}
 
-{% block title %}Movie List{% endblock %}
+{% block title %}Select Movie{% endblock %}
 
 {% block content %}
 
-<div>
-    {% if movie_data %}
-    {% for list in movie_data %}
-    <ul>
-        <li>
-            <a href="{{ url_for('select', movie_id=list.movie_id) }}">{{ list.title }} - {{ list.year }}</a>
-        </li>
-    </ul>
-    {% endfor %}
-    {% endif %}
+<div class="container">
+    <div>
+    <img class="pic border border-black border-5 mb-3" src="{{ movie.img_url }}">
+    </div>
+    <h1 class="fw-semibold font-monospace text-dark-emphasis">{{ movie.title }}</h1>
+    <p>{{ movie.year }}</p>
+    <p>{{ movie.genres }}</p>
+    <p><b>Run time:</b> {{ movie.runtime}} mins.</p>
+    <p><b>Popularity:</b> {{ movie.popularity }}</p>
+    <p>{{movie.description}}</p>
+
 </div>
-
-
-
-
-
-
 
 {% endblock %}

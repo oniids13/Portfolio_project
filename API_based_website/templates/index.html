@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Search Movie/Series Online{% endblock %}
+{% block title %}Search Movie/TV Series Online{% endblock %}
 
 {% block content %}
 
@@ -8,24 +8,24 @@
 <div class="row">
     <div class="col justify-content-center mb-3">
         <div>
-            <h1 class="text-primary text-start mb-5 text-center">Want to search for a Movie?</h1>
+            <h1 class="text-primary text-start mb-5 text-center">Want to search a Movie?</h1>
         </div>
             <div class="d-flex justify-content-center mb-3">
-             <form method="POST">
-            <input name="movie" class="form-control" type="text" placeholder="Enter a movie name" aria-label="default input example">
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-outline-secondary mt-2">Search</button>
-                </div>
+             <form method="POST" action="/search/movie">
+                <input name="query" class="form-control" type="text" placeholder="Enter a movie name" aria-label="default input example">
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-outline-secondary mt-2">Search</button>
+            </div>
              </form>
             </div>
     </div>
     <div class="col justify-content-center mb-3">
         <div>
-            <h1 class="text-primary text-start mb-5 text-center">Want to search for a Series?</h1>
+            <h1 class="text-primary text-start mb-5 text-center">Want to search a TV Series?</h1>
         </div>
             <div class="d-flex justify-content-center mb-3">
-             <form method="POST">
-            <input name="movie" class="form-control" type="text" placeholder="Enter a series name" aria-label="default input example">
+             <form method="POST" action="/search/series">
+                 <input name="query" class="form-control" type="text" placeholder="Enter a series name" aria-label="default input example">
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-outline-secondary mt-2">Search</button>
                 </div>
@@ -33,6 +33,25 @@
             </div>
     </div>
 </div>
+
+<div class="my-5">
+    <h1 class="text-center">Trending Now</h1>
+</div>
+<div class="bg-dark">
+<div class="d-flex flex-wrap mx-5">
+{% for trend in trending %}
+<div class="card mx-5 my-3" style="width: 18rem;">
+  <a href="{%if trend.media_type == 'Movie'%}{{ url_for('movie', movie_id=trend.trend_id) }}{%else%}{{ url_for('tv_show', tv_id=trend.trend_id) }}{%endif%}"><img src="{{ trend.img_url}}" class="card-img-top" alt="..."></a>
+   <div class="card-body">
+    <h5 class="card-title">{{trend.title}}</h5>
+      <p class="card-text">{{trend.year}}</p>
+       <p class="card-text">{{trend.media_type}}</p>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+
 <div class="my-5">
     <h1 class="text-center">Top 10 Popular Movies</h1>
 </div>
@@ -40,11 +59,10 @@
 <div class="d-flex flex-wrap mx-5">
 {% for movies in top_movies %}
 <div class="card mx-5 my-3" style="width: 18rem; ">
-  <a href="{{ url_for('select', movie_id=movies.movie_id) }}"><img src="{{movies.img_url}}" class="card-img-top" alt="..."></a>
+  <a href="{{ url_for('movie', movie_id=movies.movie_id) }}"><img src="{{movies.img_url}}" class="card-img-top" alt="..."></a>
   <div class="card-body">
     <h5 class="card-title">{{movies.title}}</h5>
       <p class="card-text">{{movies.year}}</p>
-    <p class="card-text">{{movies.description}}</p>
   </div>
 
 </div>
@@ -52,6 +70,24 @@
 </div>
 </div>
 
+
+<div class="my-5">
+    <h1 class="text-center">Top 10 Popular TV Series</h1>
+</div>
+<div class="bg-success">
+<div class="d-flex flex-wrap mx-5">
+{% for tv in top_tv_show %}
+<div class="card mx-5 my-3" style="width: 18rem; ">
+  <a href="{{ url_for('tv_show', tv_id=tv.tv_id) }}"><img src="{{tv.img_url}}" class="card-img-top" alt="..."></a>
+  <div class="card-body">
+    <h5 class="card-title">{{tv.title}}</h5>
+      <p class="card-text">{{tv.year}}</p>
+  </div>
+
+</div>
+{% endfor%}
+</div>
+</div>
 
 
 {% endblock %}

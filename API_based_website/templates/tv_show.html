@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+{% block title %}TV Show{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div>
+    <img class="pic border border-black border-5 mb-3" src="{{ tv.img_url }}">
+    </div>
+    <h1 class="fw-semibold font-monospace text-dark-emphasis">{{ tv.title }}</h1>
+    <p>{{ tv.year }}</p>
+    <p>{{ tv.genres }}</p>
+    <p><b>Number of Seasons:</b> {{ tv.no_of_seasons}} | <b>Number of Episodes:</b> {{ tv.no_of_episodes }} </p>
+    <p><b>Popularity:</b> {{ tv.popularity }}</p>
+    <p>{{tv.description}}</p>
+
+</div>
+
+{% endblock %}
