@@ -81,6 +81,8 @@ def add_cafe():
         return redirect(url_for('cafe'))
     return render_template("add_cafe.html", form=form)
 
+
+
 @app.route("/edit_cafe/<int:cafe_id>", methods=['GET', 'POST'])
 def edit_cafe(cafe_id):
     cafe = Cafe.query.get_or_404(cafe_id)

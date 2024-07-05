@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}BSU Aluminum and Glass Supply{% endblock %}
+
+{% block content %}
+<main>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-6 my-5 d-flex justify-content-center align-items-center" style="height: 50vh;">
+           <p class="fs-1 welcome">Welcome to BSU Aluminum and Glass Supply</p>
+        </div>
+        <div class="col-6">
+            <img class="mt-5 bsu" src="/static/images/BSU.jpg">
+        </div>
+    </div>
+
+    <div class="text-center mt-5 pt-5">
+        <h1 class="display-4 fw-bold">Quality Products on Hand</h1>
+        <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">At BSU Aluminum and Glass Supply, we pride ourselves on providing top-quality aluminum and glass products for all your residential and commercial needs. With years of experience, our expert team is dedicated to delivering exceptional service and premium products.</p>
+     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+         <a href="{{ url_for('store') }}"><button type="button" class="btn btn-success btn-lg px-4 me-sm-3">Shop now</button></a>
+         <a href="{{ url_for('contact') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Contact Us</button></a>
+      </div>
+    </div>
+    </div>
+
+    <div>
+        <h1 class="service">Key Services</h1>
+    </div>
+<section class="row pt-5 pb-5">
+<div class="col-sm-4 xs-padding-top">
+<img src="/static/images/alum.jpg">
+<h3>Aluminum Products</h3>
+<p><strong>High-quality</strong> aluminum sheets and extrusions for all your construction needs.</p>
+</div>
+<div class="col-sm-4 xs-padding-top">
+<img class="glass" src="/static/images/glass.jpg">
+<h3>Glass Products</h3>
+<p><strong>Durable</strong> and <strong>elegant</strong> glass panels and mirrors for residential and commercial projects.</p>
+</div>
+<div class="col-sm-4 xs-padding-top">
+<img class="glass" src="/static/images/custom.jpg">
+<h3>Custom Fabrication</h3>
+<p>Tailored aluminum and glass solutions to meet your <strong>unique specifications</strong>.</p>
+</div>
+</section>
+
+
+
+
+</div>
+
+</main>
+{% endblock %}

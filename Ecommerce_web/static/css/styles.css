@@ -1,0 +1,51 @@
+
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    flex: 1;
+}
+footer {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+
+#title {
+font-family: "Times New Roman", Times, serif;
+}
+
+
+.nav-item{
+font-color: red ;
+}
+
+
+.logo{
+width: 50%;
+margin-left: 30px;
+}
+
+.bsu{
+width: 120%;
+border-radius: 8px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.welcome{
+font-family: "Lucida Console", "Courier New", monospace;
+color: #F7E7DC;
+}
+
+.glass{
+height: 67%;
+}
+
+.service{
+font-size: 60px;
+}

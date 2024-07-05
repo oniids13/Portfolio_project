@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop Now{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container align-text-center py-5">
+        <h1 class="display-5 fw-bold">Our Products</h1>
+        <p class="fs-4 mt-5">Explore our wide range of aluminum and glass products. We offer high-quality materials to meet all your construction and renovation needs.</p>
+  </div>
+<img src="{{image}}">
+
+<div>
+    {% for item in products %}
+    <img src="{{item.img_url}}"><br>
+    {%endfor%}
+</div>
+
+
+{% endblock %}
