@@ -17,7 +17,18 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body class="d-flex h-100 text-center text-bg-dark">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<body class="d-flex h-100  text-bg-dark">
 <header class="d-flex flex-wrap justify-content-between align-items-center py-3 mb-4 pb-1 border-bottom">
     <div class="d-flex align-items-center">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -28,14 +39,46 @@
     <p class="text-center fs-1 text-danger ">Aluminum & Glass Supply</p>
         <p class="text-center fs-3 text-white">Wholesaler and Retailer</p>
         </div>
-      <ul class="nav nav-pills mx-3">
-       <li class="nav-item"><a href="/" class="text-white nav-link {% if active_page == 'home' %}active{% endif %}">Home</a></li>
-        <li class="nav-item"><a href="{{ url_for('store') }}" class="text-white nav-link {% if active_page == 'shop' %}active{% endif %}">Store</a></li>
-        <li class="nav-item"><a href="{{ url_for('about') }}" class="text-white nav-link {% if active_page == 'about' %}active{% endif %}">About</a></li>
-          <li class="nav-item"><a href="{{ url_for('contact') }}" class="text-white nav-link {% if active_page == 'contact' %}active{% endif %}">Contact Us</a></li>
-      </ul>
-</header>
 
+</header>
+<div class="container">
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav nav-pills navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+</svg></a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'shop' %}active{% endif %}" aria-current="page" href="{{ url_for('store') }}">Store</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about') }}">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'contact' %}active{% endif %}" href="{{ url_for('contact') }}">Contact</a>
+        </li>
+      </ul>
+        <a class="mx-5 position-relative" href="{{ url_for('cart') }}">
+  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+  </svg>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    99+
+    <span class="visually-hidden">Cart</span>
+  </span>
+</a>
+
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+</div>
     {% block content %}{% endblock %}
 
 </body>
@@ -44,7 +87,7 @@
       <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
         <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
       </a>
-      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 BSU 168 Aluminum and Glass Supply </span>
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 BSU Aluminum and Glass Supply </span>
     </div>
 
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex mx-5">
