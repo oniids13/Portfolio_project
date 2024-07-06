@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <form method="POST" action="/">
+        <input type="hidden" name="product_id" value="1">
+        {{ form.hidden_tag() }}
+        {{ form.quantity.label }} {{ form.quantity() }}
+        {{ form.submit() }}
+    </form>
+</body>
+</html>

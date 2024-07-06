@@ -21,7 +21,8 @@
     <p class="card-text text-black">{{ item.description }}</p>
       <p class="text-black fs-3">₱{{ item.price }}</p>
       <p class="text-secondary">Stock: {{item.stock_quantity}}</p>
-      <form method="POST" action="/store">
+      <form method="POST" action="{{ url_for('store') }}">
+          {{ form.hidden_tag() }}
        <input type="hidden" name="product_id" value="{{ item.product_id }}">
         {{ form.quantity(class="form-control", placeholder="Enter quantity") }}
         <button type="submit" class="btn btn-success mt-2">Add to cart</button>

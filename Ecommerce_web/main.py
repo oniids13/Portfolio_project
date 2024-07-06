@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, IntegerField
-from wtforms.validators import DataRequired, URL
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
@@ -41,7 +40,7 @@ with app.app_context():
 
 class AddToCartForm(FlaskForm):
     quantity = IntegerField('Quantity', validators=[DataRequired(), NumberRange(min=1)])
-
+    submit = SubmitField('Add to Cart')
 
 
 @app.route('/')
@@ -49,45 +48,61 @@ def home():
 
     return render_template('index.html', active_page='home')
 
+
 @app.route('/store', methods=["GET", "POST"])
 def store():
-    result = db.session.execute(db.select(ProductList))
-    all_products = result.scalars()
-
+    all_products = ProductList.query.all()
     form = AddToCartForm()
-    if form.validate_on_submit():
-        product_id = int(request.form['product_id'])
-        quantity = form.quantity.data
 
-        product = db.get_or_404(ProductList, product_id)
-        print(product)
-        if product and product.stock_quantity >= quantity:
-            # Update stock quantity
-            product.stock_quantity -= quantity
-            db.session.commit()
-
-            # Add item to session cart
-            if 'cart' not in session:
-                session['cart'] = {}
-            if product_id in session['cart']:
-                session['cart'][product_id]['quantity'] += quantity
-            else:
-                session['cart'][product_id] = {
-                    'product_name': product.product_name,
-                    'price': product.price,
-                    'quantity': quantity
-                }
-
-            flash(f'Added {quantity} {product.product_name} to your cart!', 'success')
+    if request.method == "POST":
+        print("Form submitted")
+        print(request.form)
+        try:
+            product_id = int(request.form['product_id'])
+            quantity = int(request.form['quantity'])
+        except ValueError:
+            print("Invalid data type for product ID or quantity")
+            flash("Invalid data type for product ID or quantity", 'danger')
             return redirect(url_for('store'))
 
-        else:
-            flash(f'Not enough stock available for {product.product_name}.', 'danger')
+        form = AddToCartForm(request.form)
 
-    return render_template('shop.html', active_page='shop', products=all_products, form=form)
+        if form.validate_on_submit():
+            product = ProductList.query.get_or_404(product_id)
+            if product and product.stock_quantity >= quantity:
+                cart_list = session.get('cart', [])
+                found = False
+
+                for item in cart_list:
+                    if item['product_name'] == product.product_name:
+                        item['quantity'] += quantity
+                        found = True
+                        break
+                if not found:
+                    selected_items = {
+                        'product_name': product.product_name,
+                        'price': int(product.price),
+                        'quantity': int(quantity)
+                    }
+                    cart_list.append(selected_items)
+                session['cart'] = cart_list
+
+                flash(f'Added {quantity} {product.product_name}(s) to your cart!', 'success')
+                print(f"Cart after adding product {product.product_name}: {session['cart']}")  # Debugging statement
+                return redirect(url_for('store'))
+            else:
+                flash(f'Not enough stock available for {product.product_name}.', 'danger')
+        else:
+            print("Form validation failed")
+            print(form.errors)  # Debugging statement
+    cart_items = session.get('cart', [])
+    total_quantity = sum(item['quantity'] for item in cart_items)
+    return render_template('shop.html', active_page='shop', products=all_products, form=form, total_quantity=total_quantity)
+
 
 @app.route('/about')
 def about():
+
     return render_template('about.html', active_page='about')
 
 @app.route('/contact')
@@ -96,20 +111,34 @@ def contact():
 
 @app.route('/cart')
 def cart():
-    cart_items = []
-    total_price = 0
-    if 'cart' in session:
-        for product_id, item in session['cart'].items():
-            total_price += item['price'] * item['quantity']
-            cart_items.append({
-                'product_id': product_id,
-                'product_name': item['product_name'],
-                'price': item['price'],
-                'quantity': item['quantity']
-            })
+    cart_items = session.get('cart', [])
+    total_quantity = sum(item['quantity'] for item in cart_items)
+    total_price = sum(item['price'] * item['quantity'] for item in cart_items)
+    return render_template('cart.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity)
 
-    return render_template('cart.html', cart_items=cart_items, total_price=total_price)
+@app.route('/checkout')
+def check_out():
+    cart_items = session.get('cart', [])
+    total_quantity = sum(item['quantity'] for item in cart_items)
+    total_price = sum(item['price'] * item['quantity'] for item in cart_items)
+    if not cart_items:
+        flash('Your cart is empty. Please add items to your cart before checking out.', 'danger')
+        return redirect(url_for('cart'))
 
+    return render_template('checkout.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity)
+
+
+@app.route('/clear_session')
+def clear_session():
+    session.clear()
+    return redirect(url_for('cart'))
+
+@app.route('/remove_from_cart/<product_name>', methods=['POST'])
+def remove_from_cart(product_name):
+    cart_items = session.get('cart', [])
+    updated_cart = [item for item in cart_items if item['product_name'] != product_name]
+    session['cart'] = updated_cart
+    return redirect(url_for('cart'))
 
 if __name__ == "__main__":
     app.run(debug=True)

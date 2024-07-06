@@ -13,15 +13,21 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in cart_items %}
+                {% for items in cart_items %}
                 <tr>
-                    <td>{{ item.product_name }}</td>
-                    <td>₱{{ item.price }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>₱{{ item.price * item.quantity }}</td>
+                    <td>{{ items.product_name}}</td>
+                    <td>₱{{ items.price}}</td>
+                    <td>{{ items.quantity }}</td>
+                    <td>₱{{ items.price * items.quantity }}</td>
+                    <td>
+                        <form action="{{ url_for('remove_from_cart', product_name=items.product_name) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -29,10 +35,13 @@
                 <tr>
                     <td colspan="3"><strong>Total</strong></td>
                     <td><strong>₱{{ total_price }}</strong></td>
-                </tr>
             </tfoot>
         </table>
-        <a href="{{ url_for('store') }}" class="btn btn-primary">Continue Shopping</a>
+         <a href="{{ url_for('check_out', total_price=total_price) }}" class="btn btn-success mx-3">Check Out</a>
+     <a href="{{ url_for('clear_session') }}" class="btn btn-danger">Clear</a>
+        <div class="pt-2">
+      <a href="{{ url_for('store') }}" class="btn btn-primary mx-3 mt-2">Continue Shopping</a>
+            </div>
     </div>
 
 
