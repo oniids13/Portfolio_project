@@ -47,3 +47,18 @@ font-size: 60px;
 }
 
 
+.message{
+width: 100%;
+height: 100px;
+padding: 12px 20px;
+box-sizing: border-box;
+border: 2px solid #ccc;
+border-radius: 4px;
+background-color: #f8f8f8;
+resize: none;
+}
+
+.map {
+    height: 400px; /* Height of the map */
+    width: 100%;  /* Width of the map */
+}

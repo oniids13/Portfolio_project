@@ -9,7 +9,7 @@ from wtforms.validators import DataRequired, NumberRange
 from flask_migrate import Migrate
 
 
-
+GOOGLE_API ="AIzaSyAx7nN39kJr6anXgrQ-93vzPijNUFDp5Sg"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SECRET"
@@ -106,10 +106,11 @@ def about():
     orders = session.get('orders')
     return render_template('about.html', active_page='about', total_quantity=orders)
 
-@app.route('/contact')
+@app.route('/contact', methods=["POST", "GET"])
 def contact():
     orders = session.get('orders')
-    return render_template('contact.html', active_page='contact', total_quantity=orders)
+    google_api = GOOGLE_API
+    return render_template('contact.html', active_page='contact', total_quantity=orders, api=google_api)
 
 @app.route('/cart')
 def cart():

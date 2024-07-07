@@ -4,8 +4,44 @@
 
 {% block content %}
 
+<div class="container">
+    <div class="mt-5">
+        <span class="fs-1">Interested in buying Bulk orders?</span>
+        <p class="fs-4">Contact us!</p>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form method="POST" action="{{ url_for('contact') }}">
+                <div class=" my-4">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="my-4">
+                    <label for="contact_number" class="form-label">Contact Number</label>
+                    <input type="text" class="form-control" id="contact_number" name="contact_number">
+                </div>
+                 <div class="my-4">
+                    <label for="message" class="form-label">Message</label>
+                    <input type="text" class="message form-control" id="message" name="message">
+                 </div>
+                 <div class="my-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3866.4947992130305!2d120.98381577573757!3d14.282659284780493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d608166d00b1%3A0x5acdd5b427fb53b4!2sMichael%20Commercial%20Complex%201!5e0!3m2!1sen!2sph!4v1720364248020!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div>
+                <p>Stall #182 Michael Commercial Complex Molino Paliparan Road, Paliparan 1, Dasmarinas City, Cavite (near Unitop & Wilcon depot DASMA)</p>
+                <p>Contact No.: Sun: 0925-550-7682 / Globe: 0917-550-8072</p>
+                <p>Email us at: bsualuminumandglasssupply@yahoo.com.ph</p>
+            </div>
+        </div>
+    </div>
 
-
+</div>
 
 
 {% endblock %}
