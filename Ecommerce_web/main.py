@@ -45,8 +45,8 @@ class AddToCartForm(FlaskForm):
 
 @app.route('/')
 def home():
-
-    return render_template('index.html', active_page='home')
+    orders = session.get('orders')
+    return render_template('index.html', active_page='home', total_quantity=orders)
 
 
 @app.route('/store', methods=["GET", "POST"])
@@ -97,17 +97,19 @@ def store():
             print(form.errors)  # Debugging statement
     cart_items = session.get('cart', [])
     total_quantity = sum(item['quantity'] for item in cart_items)
+    session['orders'] = total_quantity
     return render_template('shop.html', active_page='shop', products=all_products, form=form, total_quantity=total_quantity)
 
 
 @app.route('/about')
 def about():
-
-    return render_template('about.html', active_page='about')
+    orders = session.get('orders')
+    return render_template('about.html', active_page='about', total_quantity=orders)
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', active_page='contact')
+    orders = session.get('orders')
+    return render_template('contact.html', active_page='contact', total_quantity=orders)
 
 @app.route('/cart')
 def cart():
