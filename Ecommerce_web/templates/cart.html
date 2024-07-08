@@ -4,7 +4,7 @@
 
 {% block content %}
 
- <div class="container ">
+ <div class="container">
         <h1>Your Shopping Cart</h1>
         <table class="table text-white">
             <thead>
@@ -37,10 +37,10 @@
                     <td><strong>₱{{ total_price }}</strong></td>
             </tfoot>
         </table>
-         <a href="{{ url_for('check_out', total_price=total_price) }}" class="btn btn-success mx-3">Check Out</a>
+         <a href="{{ url_for('store')  }}" class="btn btn-primary mx-3">Continue Shopping</a>
      <a href="{{ url_for('clear_session') }}" class="btn btn-danger">Clear</a>
         <div class="pt-2">
-      <a href="{{ url_for('store') }}" class="btn btn-primary mx-3 mt-2">Continue Shopping</a>
+      <a href="{{ url_for('check_out', total_price=total_price) }}" class="btn btn-success btn-lg mx-3 mt-2">Check Out</a>
             </div>
     </div>
 

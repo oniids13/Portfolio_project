@@ -7,12 +7,16 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
 from wtforms.validators import DataRequired, NumberRange
 from flask_migrate import Migrate
+from datetime import datetime
+import os
+import smtplib
 
-
-GOOGLE_API ="AIzaSyAx7nN39kJr6anXgrQ-93vzPijNUFDp5Sg"
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "SECRET"
+FLASK_KEY = os.environ.get('FLASK_KEY')
+GOOGLE_KEY = os.environ.get('GOOGLE_KEY')
+EMAIL = "onids1312@gmail.com"
+app.config['SECRET_KEY'] = FLASK_KEY
 Bootstrap5(app)
 
 
@@ -45,23 +49,24 @@ class AddToCartForm(FlaskForm):
 
 @app.route('/')
 def home():
+    current_year = datetime.now().year
+
     orders = session.get('orders')
-    return render_template('index.html', active_page='home', total_quantity=orders)
+    return render_template('index.html', active_page='home', total_quantity=orders, current_year=current_year)
 
 
 @app.route('/store', methods=["GET", "POST"])
 def store():
+    current_year = datetime.now().year
+
     all_products = ProductList.query.all()
     form = AddToCartForm()
 
     if request.method == "POST":
-        print("Form submitted")
-        print(request.form)
         try:
             product_id = int(request.form['product_id'])
             quantity = int(request.form['quantity'])
         except ValueError:
-            print("Invalid data type for product ID or quantity")
             flash("Invalid data type for product ID or quantity", 'danger')
             return redirect(url_for('store'))
 
@@ -80,6 +85,7 @@ def store():
                         break
                 if not found:
                     selected_items = {
+                        'product_id': product.product_id,
                         'product_name': product.product_name,
                         'price': int(product.price),
                         'quantity': int(quantity)
@@ -88,39 +94,65 @@ def store():
                 session['cart'] = cart_list
 
                 flash(f'Added {quantity} {product.product_name}(s) to your cart!', 'success')
-                print(f"Cart after adding product {product.product_name}: {session['cart']}")  # Debugging statement
+
                 return redirect(url_for('store'))
             else:
                 flash(f'Not enough stock available for {product.product_name}.', 'danger')
         else:
             print("Form validation failed")
-            print(form.errors)  # Debugging statement
+
     cart_items = session.get('cart', [])
     total_quantity = sum(item['quantity'] for item in cart_items)
     session['orders'] = total_quantity
-    return render_template('shop.html', active_page='shop', products=all_products, form=form, total_quantity=total_quantity)
+    return render_template('shop.html', active_page='shop', products=all_products, total_quantity=total_quantity, form=form, current_year=current_year)
 
 
 @app.route('/about')
 def about():
+    current_year = datetime.now().year
+
     orders = session.get('orders')
-    return render_template('about.html', active_page='about', total_quantity=orders)
+    return render_template('about.html', active_page='about', total_quantity=orders, current_year=current_year)
 
 @app.route('/contact', methods=["POST", "GET"])
 def contact():
+    current_year = datetime.now().year
+
     orders = session.get('orders')
-    google_api = GOOGLE_API
-    return render_template('contact.html', active_page='contact', total_quantity=orders, api=google_api)
+    if request.method == "POST":
+        name = request.form["name"]
+        contact_number = request.form["contact_number"]
+        message = request.form["message"]
+        contact_form = {
+            "name": name,
+            "contact": contact_number,
+            "message": message
+        }
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=EMAIL, password=GOOGLE_KEY)
+            connection.sendmail(
+                from_addr=EMAIL,
+                to_addrs="onids1312@gmail.com",
+                msg=f"Subject: Customer Query{name}\n\nContact Number: {contact_number}\n{message}"
+            )
+        print(contact_form)
+
+    return render_template('contact.html', active_page='contact', total_quantity=orders, current_year=current_year)
 
 @app.route('/cart')
 def cart():
+    current_year = datetime.now().year
+
     cart_items = session.get('cart', [])
     total_quantity = sum(item['quantity'] for item in cart_items)
     total_price = sum(item['price'] * item['quantity'] for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity)
+    return render_template('cart.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity, current_year=current_year)
 
-@app.route('/checkout')
+@app.route('/checkout', methods=["POST", "GET"])
 def check_out():
+    current_year = datetime.now().year
+
     cart_items = session.get('cart', [])
     total_quantity = sum(item['quantity'] for item in cart_items)
     total_price = sum(item['price'] * item['quantity'] for item in cart_items)
@@ -128,7 +160,50 @@ def check_out():
         flash('Your cart is empty. Please add items to your cart before checking out.', 'danger')
         return redirect(url_for('cart'))
 
-    return render_template('checkout.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity)
+    if request.method == "POST":
+        first_name = request.form["firstName"]
+        last_name = request.form["lastName"]
+        email = request.form["email"]
+        address = request.form["address"] + " " + request.form['address2']
+        baranggay = request.form["baranggay"]
+        city = request.form["city"]
+        payment_method = request.form["paymentMethod"]
+        name_cc = request.form["cc-name"]
+        cc_number = request.form["cc-number"]
+        cc_expiration = request.form["cc-expiration"]
+        cc_cvv = request.form["cc-cvv"]
+
+        payment_details = {
+            "customer details": {
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "address": address,
+                "baranggay": baranggay,
+                "city": city,
+            },
+            "card details": {
+                "payment_method": payment_method,
+                "name": name_cc,
+                "number": cc_number,
+                "expiration": cc_expiration,
+                "CVV": cc_cvv,
+            }
+        }
+        order_details = {
+            "Items": cart_items,
+            "Total": total_price
+        }
+        print(payment_details)
+        print(order_details)
+        for items in order_details["Items"]:
+            result = ProductList.query.get_or_404(items["product_id"])
+            new_stocks = result.stock_quantity - items["quantity"]
+            result.stock_quantity = new_stocks
+        db.session.commit()
+        session.clear()
+        return redirect('order_success')
+    return render_template('checkout.html', cart_items=cart_items, total_price=total_price, total_quantity=total_quantity, current_year=current_year)
 
 
 @app.route('/clear_session')
@@ -142,6 +217,12 @@ def remove_from_cart(product_name):
     updated_cart = [item for item in cart_items if item['product_name'] != product_name]
     session['cart'] = updated_cart
     return redirect(url_for('cart'))
+
+@app.route('/order_success')
+def order_success():
+    current_year = datetime.now().year
+
+    return render_template('order_success.html', current_year=current_year)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -10,27 +10,31 @@
         <h1 class="display-5 fw-bold">Our Products</h1>
         <p class="fs-4 mt-5">Explore our wide range of aluminum and glass products. We offer high-quality materials to meet all your construction and renovation needs.</p>
   </div>
-<img src="{{image}}">
 
-<div class="d-flex flex-wrap mx-5">
+
+<div class="d-flex flex-wrap mx-5" id="top">
     {% for item in products %}
     <div class="card mx-5 my-3" style="width: 18rem;">
   <img src="{{ item.img_url }}" class="card-img-top" alt="product item">
-  <div class="card-body">
-    <h5 class="card-title text-black">{{ item.product_name }}</h5>
-    <p class="card-text text-black">{{ item.description }}</p>
-      <p class="text-black fs-3">₱{{ item.price }}</p>
-      <p class="text-secondary">Stock: {{item.stock_quantity}}</p>
-      <form method="POST" action="{{ url_for('store') }}">
-          {{ form.hidden_tag() }}
-       <input type="hidden" name="product_id" value="{{ item.product_id }}">
-        {{ form.quantity(class="form-control", placeholder="Enter quantity") }}
-        <button type="submit" class="btn btn-success mt-2">Add to cart</button>
-         </form>
-  </div>
-</div>
+    <div class="card-body">
+        <h5 class="card-title text-black">{{ item.product_name }}</h5>
+        <p class="card-text text-black">{{ item.description }}</p>
+          <p class="text-black fs-3">₱{{ item.price }}</p>
+          <p class="text-secondary">Stock: {{item.stock_quantity}}</p>
+              <form method="POST" action="{{ url_for('store') }}">
+                  {{ form.hidden_tag() }}
+               <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                {{ form.quantity(class="form-control", placeholder="Enter quantity") }}
+                <button type="submit" class="btn btn-success mt-2">Add to cart</button>
+                 </form>
+        </div>
+    </div>
+
     {%endfor%}
 </div>
 
+ <div class="top_btn d-flex justify-content-center mt-3 mb-3">
+        <a href="#top"><button type="button" class="btn btn-primary">Back to Top</button></a>
+    </div>
 
 {% endblock %}

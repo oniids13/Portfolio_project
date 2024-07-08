@@ -20,18 +20,41 @@ footer {
 font-color: red ;
 }
 
-
-.logo{
-width: 50%;
-margin-left: 30px;
+header {
+    position: relative;
 }
 
-.bsu{
-width: 120%;
-border-radius: 8px;
-margin-left: auto;
-margin-right: auto;
+.logo {
+    max-height: 50px;
+    margin-left: 30px;
 }
+
+#title {
+    flex-grow: 1;
+}
+
+.me-3 {
+    min-width: 50px;
+}
+
+
+.image-container {
+position: relative;
+width: 100%;
+height: 70vh; /* Full viewport height */
+overflow: hidden;
+}
+
+.bsu {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100%;
+height: 100%;
+object-fit: cover;
+transform: translate(-50%, -50%);
+}
+
 
 .welcome{
 font-family: "Lucida Console", "Courier New", monospace;
@@ -58,7 +81,23 @@ background-color: #f8f8f8;
 resize: none;
 }
 
-.map {
-    height: 400px; /* Height of the map */
-    width: 100%;  /* Width of the map */
+.about-pic {
+height: 100%;
+width: 100%;
+border-radius: 10px;
+}
+
+.mv {
+height: 100px;
+width: 100px;
+border-radius: 50%;
+}
+
+.card-img-top{
+height: 200px;
+}
+
+.top_btn{
+position: center;
+
 }
