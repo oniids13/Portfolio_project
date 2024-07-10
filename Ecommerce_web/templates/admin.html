@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Page{% endblock %}
+
+{% block content %}
+
+<div class="container bg bg-secondary">
+    <h1 class="text-center my-3">Manage Product</h1>
+  <div class="d-flex justify-content-end">
+  <a href="{{ url_for('add_product') }}"><button class="btn btn-success">Add Product</button></a>
+    </div>
+  <table class="table text-white">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Product Picture</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for items in products %}
+        <tr>
+          <td>{{ items.product_name }}</td>
+          <td>{{ items.description }}</td>
+          <td>₱{{ items.price }}</td>
+          <td>{{ items.stock_quantity }}</td>
+          <td><img class="prod-img" src="{{ items.img_url }}"></td>
+          <td>
+            <div class="action-buttons">
+              <form action="{{ url_for('del_product', prod_id=items.product_id) }}" method="POST">
+                <button type="submit" class="btn btn-danger">Remove</button>
+              </form>
+              <form action="{{ url_for('edit_product', prod_id=items.product_id) }}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+      <div class="d-flex justify-content-end">
+      <a href="{{ url_for('logout') }}"><button class="btn btn-danger logout mb-3">Logout</button></a>
+      </div>
+</div>
+
+{% endblock %}

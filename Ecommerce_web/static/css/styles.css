@@ -99,5 +99,42 @@ height: 200px;
 
 .top_btn{
 position: center;
-
 }
+
+ .form-control.bg-dark {
+ color: white;
+ }
+
+ .form-container {
+  width: 300px; /* Set the desired width */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 15px;
+}
+
+.logout{
+width: 100px;
+}
+
+.prod-img{
+width: 50%;
+}
+
+.table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    .table th, .table td {
+      word-wrap: break-word;
+    }
+    .prod-img {
+      max-width: 100px;
+      height: auto;
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .action-buttons form {
+      margin: 0;
+    }

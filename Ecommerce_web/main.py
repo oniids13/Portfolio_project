@@ -1,12 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash
+from functools import wraps
+
+from flask import Flask, render_template, redirect, url_for, request, session, flash, abort
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, IntegerField
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Boolean
-from wtforms.validators import DataRequired, NumberRange
+from sqlalchemy import Integer, String
+from wtforms.validators import DataRequired, NumberRange, URL
 from flask_migrate import Migrate
+from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user
 from datetime import datetime
 import os
 import smtplib
@@ -18,6 +21,21 @@ GOOGLE_KEY = os.environ.get('GOOGLE_KEY')
 EMAIL = "onids1312@gmail.com"
 app.config['SECRET_KEY'] = FLASK_KEY
 Bootstrap5(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
+
+# Decorator function for Admin
+def admin_only(f):
+    @wraps(f)
+    def admin_required(*args, **kwargs):
+        if current_user.id != 1 and current_user.id != 2:
+            return abort(403)
+        return f(*args, **kwargs)
+    return admin_required
 
 
 class Base(DeclarativeBase):
@@ -36,10 +54,26 @@ class ProductList(db.Model):
     stock_quantity: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     img_url: Mapped[str] = mapped_column(String(500), nullable=False)
 
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer,primary_key=True)
+    username: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String(250), nullable=False)
+
+
+
 
 with app.app_context():
     db.create_all()
 
+
+class ProductForm(FlaskForm):
+    product_name = StringField("Product Name")
+    description = StringField("Description")
+    price = IntegerField("Price")
+    stock_quantity = IntegerField("Stock Quantity")
+    img_url = StringField("Product Image URL")
+    submit = SubmitField("Submit")
 
 
 class AddToCartForm(FlaskForm):
@@ -54,6 +88,42 @@ def home():
     orders = session.get('orders')
     return render_template('index.html', active_page='home', total_quantity=orders, current_year=current_year)
 
+@app.route('/admin_login', methods=['GET', 'POST'])
+def login():
+    current_year = datetime.now().year
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_result = db.session.execute(db.select(User).where(User.username == username))
+        pass_result = db.session.execute(db.select(User).where(User.password == password))
+        user = user_result.scalar()
+        pwd = pass_result.scalar()
+        print(user,pwd)
+        if user and pwd:
+            flash("You we're successfully logged in.")
+            login_user(user)
+            return redirect(url_for("admin"))
+        else:
+            flash("Please check your login credentials, if you're not admin, please leave this page.")
+            return redirect(url_for('login'))
+
+
+    return render_template('login.html', current_year=current_year)
+
+
+@app.route('/admin', methods=["GET", "POST"])
+@admin_only
+def admin():
+    current_year = datetime.now().year
+    all_products = ProductList.query.all()
+
+
+    return render_template('admin.html', current_year=current_year, products=all_products)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/store', methods=["GET", "POST"])
 def store():
@@ -117,7 +187,7 @@ def about():
 @app.route('/contact', methods=["POST", "GET"])
 def contact():
     current_year = datetime.now().year
-
+    print("Request method:", request.method)
     orders = session.get('orders')
     if request.method == "POST":
         name = request.form["name"]
@@ -223,6 +293,68 @@ def order_success():
     current_year = datetime.now().year
 
     return render_template('order_success.html', current_year=current_year)
+
+@app.route('/delete_product/<prod_id>', methods=['POST'])
+def del_product(prod_id):
+    prod_id = prod_id
+    product_delete = ProductList.query.get_or_404(prod_id)
+    db.session.delete(product_delete)
+    db.session.commit()
+    return redirect(url_for('admin'))
+
+@admin_only
+@app.route('/edit_product/<prod_id>', methods=['GET', 'POST'])
+def edit_product(prod_id):
+    current_year = datetime.now().year
+    product = ProductList.query.get_or_404(prod_id)
+    form = ProductForm()
+
+    print("Request method:", request.method)
+
+    if form.validate_on_submit():
+        print('Handling POST request')
+        product.product_name = form.product_name.data
+        product.description = form.description.data
+        product.price = form.price.data
+        product.stock_quantity = form.stock_quantity.data
+        product.img_url = form.img_url.data
+
+        db.session.commit()
+        print('Product updated successfully')
+
+        return redirect(url_for('admin'))
+
+    # For GET request, populate the form with existing product data
+    elif request.method == 'GET':
+        form.product_name.data = product.product_name
+        form.description.data = product.description
+        form.price.data = product.price
+        form.stock_quantity.data = product.stock_quantity
+        form.img_url.data = product.img_url
+
+    return render_template('edit_prod.html', form=form, current_year=current_year)
+
+
+@admin_only
+@app.route('/add_product', methods=['GET', 'POST'])
+def add_product():
+    current_year = datetime.now().year
+    form = ProductForm()
+    if form.validate_on_submit():
+        print('Handling POST request')
+        new_product = ProductList(
+            product_name=form.product_name.data,
+            description=form.description.data,
+            price=form.price.data,
+            stock_quantity=form.stock_quantity.data,
+            img_url=form.img_url.data,
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        return redirect(url_for('admin'))
+
+    return render_template('add_prod.html', form=form, current_year=current_year)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
