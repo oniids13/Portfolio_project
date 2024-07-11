@@ -68,11 +68,11 @@ with app.app_context():
 
 
 class ProductForm(FlaskForm):
-    product_name = StringField("Product Name")
-    description = StringField("Description")
-    price = IntegerField("Price")
-    stock_quantity = IntegerField("Stock Quantity")
-    img_url = StringField("Product Image URL")
+    product_name = StringField("Product Name", validators=[DataRequired()])
+    description = StringField("Description", validators=[DataRequired()])
+    price = IntegerField("Price", validators=[DataRequired()])
+    stock_quantity = IntegerField("Stock Quantity", validators=[DataRequired()])
+    img_url = StringField("Product Image URL", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
