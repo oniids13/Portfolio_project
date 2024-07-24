@@ -138,3 +138,8 @@ width: 50%;
     .action-buttons form {
       margin: 0;
     }
+
+    .m-v {
+      padding-left: 50px;
+      padding-right: 50px;
+    }

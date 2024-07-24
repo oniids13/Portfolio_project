@@ -2,3 +2,5 @@ order_items = {'Items': [{'price': 150, 'product_id': 2, 'product_name': 'Alumin
 
 for items in order_items["Items"]:
     id = items['product_id']
+
+print(order_items)

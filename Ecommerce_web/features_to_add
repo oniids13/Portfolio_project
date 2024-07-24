@@ -4,6 +4,8 @@ Manage products
     delete - done
     update - done
     view - done
+Fix check out form validation
+Send email to customer and admin for orders
 Customer table
 Order table
 Payment table

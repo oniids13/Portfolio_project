@@ -4,7 +4,7 @@
 
 {% block content %}
 
- <div class="container text-start">
+ <div class="container text-start pt-5">
      <h1 class="text-center">Edit Product</h1>
          <form method='POST'>
         {{ form.hidden_tag() }}
@@ -32,6 +32,9 @@
             {{ form.submit(class="btn btn-primary") }}
         </div>
         </form>
+     <div class="pb-5">
+        <a href="{{ url_for('admin') }}"><button class="btn btn-secondary">Back</button></a>
+    </div>
             </div>
 
 
