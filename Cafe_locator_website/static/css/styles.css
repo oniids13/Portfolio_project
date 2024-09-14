@@ -68,3 +68,9 @@ margin: 20px 0;
 font-size: 18px;
 }
 
+.cont {
+display: flex;
+flex-wrap: wrap;
+gap: 80px;
+justify-content: center;
+}

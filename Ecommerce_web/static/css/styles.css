@@ -143,3 +143,16 @@ width: 50%;
       padding-left: 50px;
       padding-right: 50px;
     }
+
+ textarea{
+    border-radius: 10px;
+ }
+
+ .footer {
+    color: white;
+ }
+
+ .fb {
+ height: 30px;
+ width: 30px;
+ }
